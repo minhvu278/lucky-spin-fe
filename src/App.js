@@ -5,7 +5,7 @@ import SpinWheel from './pages/SpinWheel';
 
 // Create an Apollo Client instance
 const client = new ApolloClient({
-  uri: 'http://localhost:4000', // Update this to your GraphQL server URL
+  uri: process.env.REACT_APP_GRAPHQL_URI || '/graphql',
   cache: new InMemoryCache()
 });
 
