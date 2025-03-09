@@ -500,9 +500,9 @@ const SpinWheel = () => {
             <ActionButton onClick={handleShuffleNames}>
               Shuffle
             </ActionButton>
-            <ClearButton onClick={handleClearNames}>
+            {/* <ClearButton onClick={handleClearNames}>
               Clear All
-            </ClearButton>
+            </ClearButton> */}
           </ButtonGroup>
         )}
         
