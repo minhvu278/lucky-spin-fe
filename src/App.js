@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import SpinWheel from './pages/SpinWheel';
+
+// Create an Apollo Client instance
+const client = new ApolloClient({
+  uri: 'http://localhost:4000', // Update this to your GraphQL server URL
+  cache: new InMemoryCache()
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<SpinWheel />} />
+          <Route path="/spin/:spinListId" element={<SpinWheel />} />
+        </Routes>
+      </Router>
+    </ApolloProvider>
   );
 }
 
