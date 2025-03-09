@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import styled from 'styled-components';
 import { Wheel } from 'react-custom-roulette';
-import { GET_NAMES, ADD_NAME, CLEAR_NAMES, SPIN_TEMPORARY_NAMES } from '../graphql';
+import { GET_NAMES, ADD_NAME, CLEAR_NAMES } from '../graphql';
 
 const SpinWheelContainer = styled.div`
   max-width: 1200px;
@@ -34,102 +34,6 @@ const WheelContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const WheelBase = styled.div`
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  position: relative;
-  overflow: hidden;
-  transition: transform 5s cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: 0 0 0 5px #4a90e2, 0 0 0 15px white, 0 0 0 18px #f5a623;
-`;
-
-const WheelCenter = styled.div`
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background-color: white;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  &::after {
-    content: '';
-    width: 20px;
-    height: 20px;
-    background-color: #4a90e2;
-    border-radius: 50%;
-  }
-`;
-
-const WheelPointer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30px;
-  height: 50px;
-  z-index: 5;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: #f5a623;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  }
-`;
-
-const WheelSlice = styled.div`
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  transform-origin: bottom right;
-  left: 0;
-  top: 0;
-  transform: rotate(${props => props.rotate}deg) skewY(${props => props.skew}deg);
-  overflow: hidden;
-  background-color: ${props => props.color};
-`;
-
-const SliceContent = styled.span`
-  position: absolute;
-  font-weight: 600;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  font-size: 1rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
-const SpinButton = styled.button`
-  padding: 15px 40px;
-  background-color: #f5a623;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 700;
-  border-radius: 50px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  margin-top: 1rem;
-  
-  &:hover {
-    background-color: #e09612;
-  }
-  
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
 `;
 
 const NamesSection = styled.div`
@@ -217,27 +121,6 @@ const ActionButton = styled.button`
   &:hover {
     background-color: #3a80d2;
   }
-`;
-
-const ResultContainer = styled.div`
-  margin-top: 2rem;
-  text-align: center;
-`;
-
-const ResultTitle = styled.h3`
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: #333;
-`;
-
-const ResultValue = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-  color: #4a90e2;
-  padding: 1rem;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 `;
 
 // Add modal components before the SpinWheel component
